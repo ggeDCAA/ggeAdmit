@@ -13,6 +13,6 @@
 
 # incomplete.block.design() returns all assignments as numbers that refer to the order of names in the source data. This function enables keeping names with numbers.
 nameFinder = function(x, applNames){
-  return(unlist(applNames[x,]))
+  return(unlist(applNames[x]))
 }
 

@@ -52,11 +52,16 @@ A demographic summary is required to inform the alorithmic incomplete block desi
 
 ```
 ## Demographic summary - necessary for incomplete block design
+
 # How many reviewers are there?
 n.sr <- sum(reviewers$type == "Student")
 n.fr <- sum(reviewers$type == "Faculty")
+
 # How many applicants are there?
-n.applics <- length(unique(applicants$Name)) # Total number of applications
+n.applics <- length(unique(applicants$Name))
+
+# Applicant names (we will need this down the line)
+applicantNames = applicants$Name
 ```
 
 Use `assignReviewers()` to pair reviewers with applicants. Recall that we suggest doing this separately for Student reviewers and Faculty reviewers. For GGE reviewer assignments, it is likely that `assignReviewers()` will return a warning message: 
@@ -98,6 +103,7 @@ complete.design = combineOutputs(reviewers = reviewers,
 Checking for conflicts of interest is post-hoc and can be useful for identifying cases where manual shifting of reviewer assignments may be required. To check for conflicts of interest:
 
 ```
+library(dplyr)
 ## Compile all conflicts of interest
 conflictsOfInterest = applicants %>% select(Name, 
   `Faculty.Member.1`, `Faculty.Member.2`, 

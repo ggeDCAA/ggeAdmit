@@ -6,6 +6,14 @@ This package contains scripts for administering the holistic review process in g
 
 Two populations underlie any admissions scenario: *Reviewers* are the people who read through application materials and score each application. *Applicants* comprise the full body of students who applied to join the program in a particular calendar year. In the GGE at UC Davis, faculty and current graduate students can be reviewers. 
 
+## Installation
+
+To install, use the `devtools` package and clone from github:
+
+```
+devtools::install_github("ggeDCAA/ggeAdmit", auth_token = "YOUR_AUTH_TOKEN")
+```
+
 ## Reviewer assignment
 
 Reviewers assignment uses an incomplete block design to statistically "spread" reviewers across applicants. Because the GGE allows both faculty and current graduate students to serve as reviewers, we suggest performing two reviewer assignment steps: one series of matching faculty reviewers with applicants, and one series matching graduate student reviewers with applicants. This spreads the influence of faculty vs student reviews approximately evenly across the applicant population.

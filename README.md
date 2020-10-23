@@ -24,7 +24,11 @@ $ R CMD Build ggeAdmit
 $ R CMD INSTALL ggeAdmit_0.0.1.9000.tar.gz
 ```
 
-If properly installed, the package can then be imported in R using `library(ggeAdmit)`.
+If properly installed, the package can then be imported in R using:
+
+```
+library(ggeAdmit)
+```
 
 ## Reviewer assignment
 
@@ -40,8 +44,8 @@ applicantsFP = system.file("extdata",
   "sampleApplicants.csv", 
   package = "ggeAdmit")
 
-reviewers = read.csv(reviewersFP)
-applicants = read.csv(reviewersFP)
+reviewers = read.csv(reviewersFP, stringsAsFactors = FALSE)
+applicants = read.csv(applicantsFP, stringsAsFactors = FALSE)
 ```
 
 A demographic summary is required to inform the alorithmic incomplete block design. Specifically, we need to know how many reviewers in each type there are, and how many applicants comprise the applicant pool. Every application is reviewed!

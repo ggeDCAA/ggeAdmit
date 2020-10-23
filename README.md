@@ -21,6 +21,7 @@ If that fails, installation can also be done using a command line approach:
 ```
 $ git clone https://github.com/ggeDCAA/ggeAdmit
 $ R CMD Build ggeAdmit
+$ R CMD INSTALL ggeAdmit_0.0.1.9000.tar.gz
 ```
 
 If properly installed, the package can then be imported in R using `library(ggeAdmit)`.
@@ -32,15 +33,15 @@ Reviewers assignment uses an incomplete block design to statistically "spread" r
 Reviewer assignment can follow a relatively straightforward workflow. First, import a reviewers and applicants dataset. The reviewers dataset should columns with Name ("Lastname, Firstname"), Email, and type (type indicates "Student" or "Faculty"). The applicants dataset should contain columns `Name` ("Lastname, Firstname"), `Email`, and then 6 columns for Faculty Members with whom applicants are interested in working (each called `Faculty.Member.i` where i takes a value from 1 to 6). Note: The names for `Faculty.Member.i` should be in the format "Lastname, Firstname" and those names MUST match the names in the reviewers dataset. For example, a link between Reviewer Charles Darwin and Applicant's Faculty.Member.1 interest "Darwin, Charlie" cannot be inferred by ggeAdmit.
 
 ```
-reviewers = system.file("extdata", 
+reviewersFP = system.file("extdata", 
   "sampleReviewers.csv", 
   package = "ggeAdmit")
-applicants = system.file("extdata", 
+applicantsFP = system.file("extdata", 
   "sampleApplicants.csv", 
   package = "ggeAdmit")
 
-head(reviewers)
-head(applicants)
+reviewers = read.csv(reviewersFP)
+applicants = read.csv(reviewersFP)
 ```
 
 A demographic summary is required to inform the alorithmic incomplete block design. Specifically, we need to know how many reviewers in each type there are, and how many applicants comprise the applicant pool. Every application is reviewed!

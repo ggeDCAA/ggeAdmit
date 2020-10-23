@@ -1,0 +1,28 @@
+Package: ggeAdmit
+Title: Administering the holistic review process in graduate admissions
+Version: 0.0.1.9000
+Authors@R: c(
+    person(given = "Christian",
+           family = "John",
+           role = c("aut","cre"),
+           email = "cjohn@ucdavis.edu",
+           comment = c(ORCID = "https://orcid.org/0000-0002-6249-040X")),
+    person(given = "Ellen",
+           family = "Bolas",
+           role = c("aut"),
+           email = "ecbolas@ucdavis.edu",
+           comment = c(ORCID = "https://orcid.org/0000-0002-5604-2942")),
+    person(given = "Emilio",
+           family = "Laca",
+           role = c("aut"),
+           email = "elaca@ucdavis.edu",
+           comment = c(ORCID = "https://orcid.org/0000-0002-7551-0721"))
+           )
+Description: This package contains scripts for administering the holistic review process in graduate admissions. Holistic review entails evaluating the "total applicant" - that is, the experiences, abilities, and contributions of the person applying, rather than a test score or two. Ultimately the package will include functions for a complete reviewer assignments and applicant ranking workflow.
+Imports:
+    AlgDesign,
+    dplyr
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.0

@@ -12,14 +12,6 @@
 # 
 
 
-
-# A function to extract names from applicant info using the sampling design output from incomplete.block.design()
-# incomplete.block.design() returns all assignments as numbers that refer to the order of names in the source data. This function enables keeping names with numbers.
-nameFinder = function(x, applNames){
-  return(unlist(applNames[x,]))
-}
-
-
 # A function to extract the reviewer assignments from the incomplete block design. Here, x is a design generated from incomplete.block.design(). 
 getAssignments = function(x, appNames){
   myDesign = t(x$design)
@@ -28,5 +20,6 @@ getAssignments = function(x, appNames){
                      MARGIN = c(1,2),
                      FUN = nameFinder,
                      applNames = appNames)
+  return(myDesNames)
 }
 

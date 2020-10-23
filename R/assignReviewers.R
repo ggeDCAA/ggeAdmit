@@ -37,7 +37,7 @@ assignReviewers <- function(number.alternatives,
   best.result = NULL
   best.D = -Inf
   for (i in 1:n.repeats) {
-    alg.results <- optBlock(~.,
+    alg.results <- AlgDesign::optBlock(~.,
                             withinData = factor(1:number.alternatives),
                             blocksizes = rep(alternatives.per.block,number.blocks), 
                             nRepeats = nReps) #BIB
@@ -75,7 +75,7 @@ assignReviewers <- function(number.alternatives,
        design = t(design), 
        frequencies = n.appearances.per.alternative, 
        pairwise.frequencies = combinations.of.alternatives, 
-       binary.correlations = round(cor(binary.design),2),
+       binary.correlations = round(stats::cor(binary.design),2),
        optAlgD = best.D)
 }
 # *Note: In the future, potentially include "illegal pairs" (conflicts of interest). In other words, tell the function not to allow some pairings. Use https://stackoverflow.com/questions/38020958/coerce-optblock-in-algdesign-r-package-to-only-show-certain-treatments-per-row-o

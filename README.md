@@ -123,8 +123,8 @@ Other summaries of the data can be useful to inspect. For example, tabulate the 
 # broken down by student and faculty reviewers
 n.revs.per.app <- data.frame(appID = 1:n.applics, 
                              appName = applicantNames,
-                             student.revs = apply(student.reviewers$binary.design,1,sum), 
-                             faculty.revs = apply(faculty.reviewers$binary.design,1,sum))
+                             student.revs = apply(student.design$binary.design,1,sum), 
+                             faculty.revs = apply(faculty.design$binary.design,1,sum))
 ```
 
 Don't forget to save outputs! `assignReviewers()` takes a long time and it would be a shame to lose all of your hard work.

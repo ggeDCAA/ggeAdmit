@@ -71,7 +71,7 @@ Use `assignReviewers()` to pair reviewers with applicants. Recall that we sugges
 
 >"In assignReviewers(number.alternatives = n.applics, number.blocks = n.sr,  :It is recommended that number.blocks >= 3 * number.alternatives / alternatives.per.block"
 
-Because of how many people need to be reviewed, and how many people typically sign up to review, and how many times applicants will be reviewed, and how many applications we can reasonably expect a reviewer to review, it's impossible to achieve this recommendation. Optimal designs can be found more quickly when that condition is satisfied, but we have to get by with the resources that are available to us. 
+Because of how many applications need to be reviewed, and how many people typically sign up to review, and how many times applicants will be reviewed, and how many applications we can reasonably expect a reviewer to review, it's usually impossible to achieve this recommendation. Optimal designs can be found more quickly when that condition is satisfied, but we have to get by with the resources that are available to us. 
 
 The incomplete block design takes a *long* time to complete! For an actual admissions scenario we recommend at least 200-300 replicates based on an analysis of assignment optimality across different replicate sizes. The default value for `nReps` is 300. However, to simplify and expedite the example code, we set `nReps = 10` here.
 

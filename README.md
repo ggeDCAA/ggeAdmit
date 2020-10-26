@@ -37,6 +37,8 @@ Reviewers assignment uses an incomplete block design to statistically "spread" r
 Reviewer assignment can follow a relatively straightforward workflow. First, import a reviewers and applicants dataset. The reviewers dataset should columns with Name ("Lastname, Firstname"), Email, and type (type indicates "Student" or "Faculty"). The applicants dataset should contain columns `Name` ("Lastname, Firstname"), `Email`, and then 6 columns for Faculty Members with whom applicants are interested in working (each called `Faculty.Member.i` where i takes a value from 1 to 6). Note: The names for `Faculty.Member.i` should be in the format "Lastname, Firstname" and those names MUST match the names in the reviewers dataset. For example, a link between Reviewer Charles Darwin and Applicant's Faculty.Member.1 interest "Darwin, Charlie" cannot be inferred by ggeAdmit. For your convenience, we include a sample dataset of reviewers and applicants (all names and email addresses are random combinations of letters).
 
 ```
+## Import data
+# Access built-in sample data. All installations of ggeAdmit should put the sample data in the same location, which can be identified using the `system.file()` function here.
 reviewersFP = system.file("extdata", 
   "sampleReviewers.csv", 
   package = "ggeAdmit")
@@ -46,20 +48,21 @@ applicantsFP = system.file("extdata",
 
 reviewers = read.csv(reviewersFP, stringsAsFactors = FALSE)
 applicants = read.csv(applicantsFP, stringsAsFactors = FALSE)
+
+## Look at the data
+reviewers
+applicants
 ```
 
 A demographic summary is required to inform the alorithmic incomplete block design. Specifically, we need to know how many reviewers in each type there are, and how many applicants comprise the applicant pool. Every application is reviewed!
 
 ```
 ## Demographic summary - necessary for incomplete block design
-
 # How many reviewers are there?
 n.sr <- sum(reviewers$type == "Student")
 n.fr <- sum(reviewers$type == "Faculty")
-
 # How many applicants are there?
 n.applics <- length(unique(applicants$Name))
-
 # Applicant names (we will need this down the line)
 applicantNames = applicants$Name
 ```
@@ -86,6 +89,7 @@ faculty.design <- assignReviewers(number.alternatives = n.applics,
 `assignReviewers()` returns a list of 6 elements. For the simple purpose of assigning reviewers to applicants, the element `$design` is of the most immediate importance. Use the function `getAssignments()` to extract identities of applicants ("Alternatives") and reviewers ("Blocks") from the incomplete block design.
 
 ```
+## Extract identifying information from the incomplete block design reviewer assignment
 s.des.names = getAssignments(x = student.design,
                              appNames = applicantNames)
 f.des.names = getAssignments(x = faculty.design,
@@ -95,6 +99,7 @@ f.des.names = getAssignments(x = faculty.design,
 Compile the reviewer assignments to a single cohesive datset.
 
 ```
+## Combine Student and Faculty outputs to generate the complete reviewer assignments design
 complete.design = combineOutputs(reviewers = reviewers,
                                  assignments1 = s.des.names,
                                  assignments2 = f.des.names)
@@ -103,12 +108,13 @@ complete.design = combineOutputs(reviewers = reviewers,
 Checking for conflicts of interest is post-hoc and can be useful for identifying cases where manual shifting of reviewer assignments may be required. To check for conflicts of interest:
 
 ```
-library(dplyr)
 ## Compile all conflicts of interest
-conflictsOfInterest = applicants %>% select(Name, 
-  `Faculty.Member.1`, `Faculty.Member.2`, 
-  `Faculty.Member.3`, `Faculty.Member.4`, 
-  `Faculty.Member.5`, `Faculty.Member.6`)
+library(dplyr)
+conflictsOfInterest = applicants %>% 
+  select(Name, 
+         `Faculty.Member.1`, `Faculty.Member.2`, 
+         `Faculty.Member.3`, `Faculty.Member.4`, 
+         `Faculty.Member.5`, `Faculty.Member.6`)
 
 ## Identify cases where COI pairs were assigned by the incomplete block design
 conflictsSummary = summarizeConflicts(COIs = conflictsOfInterest,
@@ -119,8 +125,7 @@ conflictsSummary
 Other summaries of the data can be useful to inspect. For example, tabulate the number of student and faculty reviewers assigned to each applicant:
 
 ```
-# Generate data frame that summarizes the number of reviews assigned to each applicant, 
-# broken down by student and faculty reviewers
+## Summarize the reviewer count per application
 n.revs.per.app <- data.frame(appID = 1:n.applics, 
                              appName = applicantNames,
                              student.revs = apply(student.design$binary.design,1,sum), 
@@ -130,6 +135,7 @@ n.revs.per.app <- data.frame(appID = 1:n.applics,
 Don't forget to save outputs! `assignReviewers()` takes a long time and it would be a shame to lose all of your hard work.
 
 ```
+## Save outputs
 write.table(complete.design, "Assignments_GGE.csv",
             row.names = FALSE, col.names = TRUE, sep = ",")
 write.table(conflictsOfInterest, "applicant_COIs.csv",
@@ -142,6 +148,6 @@ write.table(n.revs.per.app, "n_revs_per_app.csv",
 
 ## Applicant ranking
 
-Applicants are ranked using the holistic scores generated by faculty and student reviewers. 
+Applicants are ranked using the holistic scores generated by faculty and student reviewers. This component of the `ggeAdmit` library is still in development.
 
 

@@ -54,7 +54,7 @@ reviewers
 applicants
 ```
 
-A demographic summary is required to inform the alorithmic incomplete block design. Specifically, we need to know how many reviewers in each type there are, and how many applicants comprise the applicant pool. Every application is reviewed!
+A demographic summary is required to inform the algorithmic incomplete block design. Specifically, we need to know how many reviewers in each type there are, and how many applicants comprise the applicant pool. Every application is reviewed!
 
 ```
 ## Demographic summary - necessary for incomplete block design

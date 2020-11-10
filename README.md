@@ -16,12 +16,21 @@ To install, use the `devtools` package and clone from github. This may be possib
 devtools::install_github("ggeDCAA/ggeAdmit")
 ```
 
-If that fails, installation can also be done using a command line approach:
+If that fails, installation can also be done using a command line approach. There are different protocols for Mac and Windows.
+
+### Mac:
 
 ```
 $ git clone https://github.com/ggeDCAA/ggeAdmit
 $ R CMD Build ggeAdmit
 $ R CMD INSTALL ggeAdmit_0.0.1.9000.tar.gz
+```
+
+### Windows:
+
+```
+>git clone https://github.com/ggeDCAA/ggeAdmit
+>R CMD INSTALL --build ggeAdmit
 ```
 
 If properly installed, the package can then be imported in R using:

@@ -18,7 +18,7 @@ devtools::install_github("ggeDCAA/ggeAdmit")
 
 If that fails, installation can also be done using a command line approach. There are different protocols for Mac and Windows.
 
-###Mac:
+### Mac:
 
 ```
 $ git clone https://github.com/ggeDCAA/ggeAdmit
@@ -26,7 +26,7 @@ $ R CMD Build ggeAdmit
 $ R CMD INSTALL ggeAdmit_0.0.1.9000.tar.gz
 ```
 
-###Windows:
+### Windows:
 
 ```
 >git clone https://github.com/ggeDCAA/ggeAdmit

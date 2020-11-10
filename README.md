@@ -16,7 +16,9 @@ To install, use the `devtools` package and clone from github. This may be possib
 devtools::install_github("ggeDCAA/ggeAdmit")
 ```
 
-If that fails, installation can also be done using a command line approach. There are different protocols for Mac and Windows.
+You may run into an error about package dependencies; you can install dependencies using `install.packages("AlgDesign")` and `install.packages("dplyr")` if you don't already have them.
+
+If the devtools approach fails, installation can also be done using a command line approach. There are different protocols for Mac and Windows.
 
 ### Mac:
 

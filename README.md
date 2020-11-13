@@ -51,7 +51,10 @@ Reviewer assignment can follow a relatively straightforward workflow. First, imp
 
 ```
 ## Import data
-# Access built-in sample data. All installations of ggeAdmit should put the sample data in the same location, which can be identified using the `system.file()` function here.
+# Access built-in sample data. All installations of ggeAdmit should 
+# put the sample data in the same location, which can be identified 
+# using the `system.file()` function here.
+
 reviewersFP = system.file("extdata", 
   "sampleReviewers.csv", 
   package = "ggeAdmit")
@@ -61,10 +64,6 @@ applicantsFP = system.file("extdata",
 
 reviewers = read.csv(reviewersFP, stringsAsFactors = FALSE)
 applicants = read.csv(applicantsFP, stringsAsFactors = FALSE)
-
-## Look at the data
-reviewers
-applicants
 ```
 
 A demographic summary is required to inform the algorithmic incomplete block design. Specifically, we need to know how many reviewers in each type there are, and how many applicants comprise the applicant pool. Every application is reviewed!

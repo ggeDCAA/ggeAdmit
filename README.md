@@ -91,7 +91,7 @@ checkPI(reviewersDF = reviewers, applicantsDF = applicants)
 
 > [1] "Eilers, Mike" "Ali, Matthwe"
 
-Here, we can see that two names listed as faculty of interest by applicants are not present in the reviewer sign-up dataset. This reveals two potential issues: First, the GGE requires that faculty who are accepting students must sign up to review applications during that year's admissions cycle. If a listed faculty of interest is not a reviewer (but plans on accepting students), they are breaking rules! Second, there may be spelling or name convention issues, which is what appears to be the case here. You will have to sift through the `applicants` dataset and manually correct mismatched names.
+Here, we can see that two names listed as faculty of interest by applicants are not present in the reviewer sign-up dataset. This reveals two potential issues: First, the GGE requires that faculty who are accepting students must sign up to review applications during that year's admissions cycle. If a listed faculty of interest is not a reviewer (but plans on accepting students), they are breaking rules! Second, there may be spelling or name convention issues, which is what appears to be the case here. You will have to sift through the `applicants` dataset and manually correct mismatched names. After taking a closer look, we find that Mike Eilers used "Michael" when he signed up to review, and one applicant used the more common "Mike" when listing that faculty member on their application. We can also see that in one case, an applicant misspelled the name of a potential faculty of interest, Matthew Ali.
 
 ### Reviewer assignments
 

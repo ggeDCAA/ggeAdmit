@@ -16,8 +16,6 @@
 checkPI = function(reviewersDF,
                    applicantsDF){
   # Generate list of applicants' faculty of interest names
-  applicantsDF %>%
-    select(Faculty.Member.1)
   appProfs = applicantsDF[,c("Faculty.Member.1", "Faculty.Member.2", "Faculty.Member.3", 
                              "Faculty.Member.4", "Faculty.Member.5", "Faculty.Member.6")]
   FOI = unlist(appProfs)

@@ -15,21 +15,32 @@
 # but is not present in the reviewer dataset
 checkPI = function(reviewersDF,
                    applicantsDF){
-  appProfs = applicantsDF %>%
-    select(c("Faculty.Member.1","Faculty.Member.2","Faculty.Member.3",
-             "Faculty.Member.4","Faculty.Member.5","Faculty.Member.6")) %>%
-    pull()
-  revProfs = reviewersDF %>%
-    select("Name") %>%
-    pull()
-  presenceAbsence = appProfs %in% revProfs
-  absentProfs = appProfs[!presenceAbsence]
-  missingProfessors = absentProfs[!is.na(absentProfs)]
-  if(length(missingProfessors) == 0){
+  # Generate list of applicants' faculty of interest names
+  applicantsDF %>%
+    select(Faculty.Member.1)
+  appProfs = applicantsDF[,c("Faculty.Member.1", "Faculty.Member.2", "Faculty.Member.3", 
+                             "Faculty.Member.4", "Faculty.Member.5", "Faculty.Member.6")]
+  FOI = unlist(appProfs)
+  names(FOI) <- NULL
+  
+  # Generate list of faculty names
+  RevNames = reviewersDF$Name[reviewersDF$type == "Faculty"]
+  RevNames = unlist(RevNames)
+  
+  revPresence = RevNames %in% FOI # Faculty reviewer has been listed as Faculty of Interest
+  appPresence = FOI %in% RevNames # Faculty of interest is present in reviewer list
+  
+  # Figure out who is *not* present
+  absentRev = RevNames[!revPresence]
+  absentFOI = FOI[!appPresence]
+  absentFOI = absentFOI[!is.na(absentFOI)]
+  
+  if (length(absentFOI) == 0) {
     message("All faculty of interest are present in list of reviewers")
     return(NULL)
-  }else{
+  }
+  else {
     message("Some faculty of interest are not present in reviewers dataset")
-    return(missingProfessors)
+    return(absentFOI)
   }
 }

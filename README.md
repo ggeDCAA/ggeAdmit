@@ -84,9 +84,8 @@ Before getting to reviewer assignments, it is important to verify that name conv
 checkPI(reviewersDF = reviewers, applicantsDF = applicants)
 ```
 
-> checkPI(reviewersDF = reviewers, applicantsDF = applicants)
-Some faculty of interest are not present in reviewers dataset
-[1] "Eilers, Mike" "Ali, Matthwe"
+> Some faculty of interest are not present in reviewers dataset
+> [1] "Eilers, Mike" "Ali, Matthwe"
 
 Here, we can see that two names listed as faculty of interest by applicants are not present in the reviewer sign-up dataset. This reveals two potential issues: First, the GGE requires that faculty who are accepting students must sign up to review applications during that year's admissions cycle. If a listed faculty of interest is not a reviewer (but plans on accepting students), they are breaking rules! Second, there may be spelling or name convention issues, which is what appears to be the case here. You will have to sift through the `applicants` dataset and manually correct mismatched names.
 

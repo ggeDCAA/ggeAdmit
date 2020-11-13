@@ -78,6 +78,12 @@ n.applics <- length(unique(applicants$Name))
 applicantNames = applicants$Name
 ```
 
+Before getting to reviewer assignments, it is important to verify that name conventions used by faculty who signed up to review follow the same approach as the names indicated by applicants as potential faculty of interest. Use the `checkPI()` function to verify that faculty of interest listed by applicants are present in the reviewers dataset. If `checkPI()` returns `NULL`, all faculty of interest are present in the faculty sign-up list. If some faculty are "missing" (or misspelled, etc.) a vector of missing persons is returned.
+
+```
+checkPI(reviewersDF = reviewers, applicantsDF = applicants)
+```
+
 Use `assignReviewers()` to pair reviewers with applicants. Recall that we suggest doing this separately for Student reviewers and Faculty reviewers. For GGE reviewer assignments, it is likely that `assignReviewers()` will return a warning message: 
 
 >"In assignReviewers(number.alternatives = n.applics, number.blocks = n.sr,  :It is recommended that number.blocks >= 3 * number.alternatives / alternatives.per.block"

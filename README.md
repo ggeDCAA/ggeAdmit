@@ -41,9 +41,11 @@ If properly installed, the package can then be imported in R using:
 library(ggeAdmit)
 ```
 
-## Reviewer assignment
+## Reviewer assignment workflow
 
 Reviewers assignment uses an incomplete block design to statistically "spread" reviewers across applicants. Because the GGE allows both faculty and current graduate students to serve as reviewers, we suggest performing two reviewer assignment steps: one series of matching faculty reviewers with applicants, and one series matching graduate student reviewers with applicants. This spreads the influence of faculty vs student reviews approximately evenly across the applicant population.
+
+### Import applicant and reviewer datasets
 
 Reviewer assignment can follow a relatively straightforward workflow. First, import a reviewers and applicants dataset. The reviewers dataset should columns with Name ("Lastname, Firstname"), Email, and type (type indicates "Student" or "Faculty"). The applicants dataset should contain columns `Name` ("Lastname, Firstname"), `Email`, and then 6 columns for Faculty Members with whom applicants are interested in working (each called `Faculty.Member.i` where i takes a value from 1 to 6). Note: The names for `Faculty.Member.i` should be in the format "Lastname, Firstname" and those names MUST match the names in the reviewers dataset. For example, a link between Reviewer Charles Darwin and Applicant's Faculty.Member.1 interest "Darwin, Charlie" cannot be inferred by ggeAdmit. For your convenience, we include a sample dataset of reviewers and applicants (all names and email addresses are random combinations of letters).
 
@@ -78,6 +80,8 @@ n.applics <- length(unique(applicants$Name))
 applicantNames = applicants$Name
 ```
 
+### Checking for valid faculty matchups
+
 Before getting to reviewer assignments, it is important to verify that name conventions used by faculty who signed up to review follow the same approach as the names indicated by applicants as potential faculty of interest. Use the `checkPI()` function to verify that faculty of interest listed by applicants are present in the reviewers dataset. If `checkPI()` returns `NULL`, all faculty of interest are present in the faculty sign-up list. If some faculty are "missing" (or misspelled, etc.) a vector of missing persons is returned.
 
 ```
@@ -89,6 +93,8 @@ checkPI(reviewersDF = reviewers, applicantsDF = applicants)
 > [1] "Eilers, Mike" "Ali, Matthwe"
 
 Here, we can see that two names listed as faculty of interest by applicants are not present in the reviewer sign-up dataset. This reveals two potential issues: First, the GGE requires that faculty who are accepting students must sign up to review applications during that year's admissions cycle. If a listed faculty of interest is not a reviewer (but plans on accepting students), they are breaking rules! Second, there may be spelling or name convention issues, which is what appears to be the case here. You will have to sift through the `applicants` dataset and manually correct mismatched names.
+
+### Reviewer assignments
 
 Use `assignReviewers()` to pair reviewers with applicants. Recall that we suggest doing this separately for Student reviewers and Faculty reviewers. For GGE reviewer assignments, it is likely that `assignReviewers()` will return a warning message: 
 
@@ -128,6 +134,8 @@ complete.design = combineOutputs(reviewers = reviewers,
                                  assignments2 = f.des.names)
 ```
 
+### Checking assignments for conflicts of interest
+
 Checking for conflicts of interest is post-hoc and can be useful for identifying cases where manual shifting of reviewer assignments may be required. To check for conflicts of interest:
 
 ```
@@ -154,6 +162,8 @@ n.revs.per.app <- data.frame(appID = 1:n.applics,
                              student.revs = apply(student.design$binary.design,1,sum), 
                              faculty.revs = apply(faculty.design$binary.design,1,sum))
 ```
+
+### Save outputs
 
 Don't forget to save outputs! `assignReviewers()` takes a long time and it would be a shame to lose all of your hard work.
 

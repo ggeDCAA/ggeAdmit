@@ -39,6 +39,6 @@ checkPI = function(reviewersDF,
   }
   else {
     message("Some faculty of interest are not present in reviewers dataset")
-    return(absentFOI)
+    return(unique(absentFOI))
   }
 }
